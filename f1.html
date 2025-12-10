@@ -24,26 +24,39 @@
   <div class="content">
     <header><h1  style ="color:chocolate">Formula One News</h1></header>
 
-    <main>
-      <section>
-        <h2>Race Calendar 2025</h2>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
+   <main class="page">
+    <header class="section-header">
+      <div class="section-filters">
+        <button class="chip active" data-section-chip="races">Races</button>
+        <button class="chip" data-section-chip="teams">Teams</button>
+        <button class="chip" data-section-chip="drivers">Drivers</button>
+        <button class="chip" data-section-chip="tech">Tech</button>
+      </div>
+    </header>
 
-      <section>
-        <h2>Recent News</h2>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
-    </main>
+    <section class="cards-grid" data-news-cards></section>
 
+    <div class="actions-row">
+      <button class="button" data-load-more>Load more</button>
+    </div>
+    <p class="status-text" data-news-status></p>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initTopicPage({
+        topicName: "Formula 1",
+        baseQuery: "Formula 1 OR F1", 
+        sections: [
+          { id: "races",       label: "Races",       query: "grand prix OR race" },
+          { id: "teams",       label: "Teams",       query: "F1 team OR constructors" },
+          { id: "drivers",     label: "Drivers",     query: "F1 driver OR grid" },
+          { id: "tech",        label: "Tech",        query: "F1 car development OR aerodynamics" }
+        ]
+      });
+    });
+  </script>
     <footer>
       <p style="color:white">&copy; 2025 NewsDash. All rights reserved.</p>
     </footer>

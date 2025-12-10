@@ -3,34 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NewsDash - About</title>
+  <title>NewsDash - Anime & Manga</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body style="background-color: #320a8e;">
   <div class="sidebar">
     <nav>
       <ul>
         <li><a href="home.html"><span class="icon">🏠</span><span class="label">Home</span></a></li>
-        <li><a href="anime.html"><span class="icon">🎨</span><span class="label">Anime/Manga</span></a></li>
+        <li><a href="anime.html" class="active"><span class="icon">🎨</span><span class="label">Anime/Manga</span></a></li>
         <li><a href="f1.html"><span class="icon">🏎️</span><span class="label">Formula One</span></a></li>
         <li><a href="bjj.html"><span class="icon">🛡️</span><span class="label">BJJ</span></a></li>
         <li><a href="judo.html"><span class="icon">🥋</span><span class="label">Judo</span></a></li>
-        <li><a href="about.html" class="active"><span class="icon">ℹ️</span><span class="label">About</span></a></li>
+        <li><a href="about.html"><span class="icon">ℹ️</span><span class="label">About</span></a></li>
         <li><a href="contact.html"><span class="icon">📞</span><span class="label">Contact</span></a></li>
       </ul>
     </nav>
   </div>
 
   <div class="content">
-    <header><h1  style ="color:chocolate">About NewsDash</h1></header>
+    <header><h1 style ="color:chocolate">Anime & Manga News</h1></header>
 
-    <main>
-      <section>
-        <p>NewsDash is a simple news update platform dedicated to providing the latest news and information in Anime/Manga and Formula One racing and various genres like combact sports, grappling etc</p>
-        <p>Our goal is to bring enthusiasts quality content, schedules, and updates all in one easy-to-navigate website.</p>
-      </section>
-    </main>
+     <main class="page">
+    <header class="section-header">
+      <div class="section-filters">
+        <button class="chip active" data-section-chip="anime">Anime</button>
+        <button class="chip" data-section-chip="manga">Manga</button>
+        <button class="chip" data-section-chip="movies">Movies</button>
+        <button class="chip" data-section-chip="events">Events</button>
+      </div>
+    </header>
 
+    <section class="cards-grid" data-news-cards></section>
+
+    <div class="actions-row">
+      <button class="button" data-load-more>Load more</button>
+    </div>
+    <p class="status-text" data-news-status></p>
+  </main>
+<script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initTopicPage({
+        topicName: "Anime",
+        baseQuery: "anime OR manga",
+        sections: [
+          { id: "anime", label: "Anime", query: "anime" },
+          { id: "manga", label: "Manga", query: "manga" },
+          { id: "movies", label: "Movies", query: "anime movies OR anime film" },
+          { id: "events", label: "Events", query: "anime convention OR anime event" }
+        ]
+      });
+    });
+  </script>
     <footer>
       <p style="color:white">&copy; 2025 NewsDash. All rights reserved.</p>
     </footer>

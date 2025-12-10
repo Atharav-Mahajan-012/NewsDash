@@ -24,25 +24,39 @@
   <div class="content">
     <header><h1 style ="color:chocolate">Brazilian Jiu-Jitsu [BJJ] News</h1></header>
 
-    <main>
-      <section>
-        <h2>Upcoming Tournaments</h2>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
+    <main class="page">
+    <header class="section-header">
+      <div class="section-filters">
+        <button class="chip active" data-section-chip="events">Events</button>
+        <button class="chip" data-section-chip="competitions">Competitions</button>
+        <button class="chip" data-section-chip="techniques">Techniques</button>
+        <button class="chip" data-section-chip="rankings">Rankings</button>
+      </div>
+    </header>
 
-      <section>
-        <h2>Recent Highlights</h2>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
-    </main>
+    <section class="cards-grid" data-news-cards></section>
+
+    <div class="actions-row">
+      <button class="button" data-load-more>Load more</button>
+    </div>
+    <p class="status-text" data-news-status></p>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initTopicPage({
+        topicName: "BJJ",
+        baseQuery: "Brazilian Jiu-Jitsu OR BJJ",
+        sections: [
+          { id: "events",       label: "Events",       query: "BJJ event OR seminar" },
+          { id: "competitions", label: "Competitions", query: "BJJ championship OR tournament" },
+          { id: "techniques",   label: "Techniques",   query: "BJJ technique OR submission" },
+          { id: "rankings",     label: "Rankings",     query: "BJJ ranking OR IBJJF standings" }
+        ]
+      });
+    });
+  </script>
 
     <footer>
       <p>&copy; 2025 NewsDash. All rights reserved.</p>
