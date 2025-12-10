@@ -22,21 +22,43 @@
   </div>
 
   <div class="content">
-    <header><h1 style="color:chocolate">Anime & Manga News</h1></header>
+    <header><h1 style ="color:chocolate">Anime & Manga News</h1></header>
 
-    <main style="color:rgb(0, 0, 0)">
-      <section>
-        <h2>Latest Anime Articles</h2>
-        
-        <div id="anime-news"></div>
-      </section>
-    </main>
+     <main class="page">
+    <header class="section-header">
+      <div class="section-filters">
+        <button class="chip active" data-section-chip="anime">Anime</button>
+        <button class="chip" data-section-chip="manga">Manga</button>
+        <button class="chip" data-section-chip="movies">Movies</button>
+        <button class="chip" data-section-chip="events">Events</button>
+      </div>
+    </header>
 
+    <section class="cards-grid" data-news-cards></section>
+
+    <div class="actions-row">
+      <button class="button" data-load-more>Load more</button>
+    </div>
+    <p class="status-text" data-news-status></p>
+  </main>
+<script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initTopicPage({
+        topicName: "Anime",
+        baseQuery: "anime OR manga",
+        sections: [
+          { id: "anime", label: "Anime", query: "anime" },
+          { id: "manga", label: "Manga", query: "manga" },
+          { id: "movies", label: "Movies", query: "anime movies OR anime film" },
+          { id: "events", label: "Events", query: "anime convention OR anime event" }
+        ]
+      });
+    });
+  </script>
     <footer>
       <p style="color:white">&copy; 2025 NewsDash. All rights reserved.</p>
     </footer>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
