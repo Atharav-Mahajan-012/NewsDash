@@ -134,7 +134,7 @@ function initTopicPage({
       }
     } catch (err) {
       console.error("News API error:", err);
-      setStatus("“Live API news works fully on localhost (dev mode, supported by NewsAPI free plan). On other devices/origins, the provider limits requests, so the UI shows an error message.”");
+      setStatus("Live news works on desktop localhost. On some devices or networks, the news provider may block requests, so this page cannot load articles right now.");
     }
   }
 
