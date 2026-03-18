@@ -1,39 +1,31 @@
-const NEWS_API_KEY = "11616c7dc6ef457182a7d830fc4a3e82"; 
-
 function getMonthRange() {
   const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), 1);     
-  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);   
-  const toIso = (d) => d.toISOString().slice(0, 10);                
+  const start = new Date(now.getFullYear(), now.getMonth(), 1);
+  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  const toIso = (d) => d.toISOString().slice(0, 10);
   return { from: toIso(start), to: toIso(end) };
 }
 
-
 async function fetchNews({ topicQuery, page = 1 }) {
-  const { from, to } = getMonthRange();                             
-  const url = new URL("https://newsapi.org/v2/everything");         
-  url.searchParams.set("q", topicQuery);                           
+  const { from, to } = getMonthRange();
+  const url = new URL("/newsdash/news.php"); 
+
+  url.searchParams.set("topicQuery", topicQuery);
   url.searchParams.set("from", from);
   url.searchParams.set("to", to);
-  url.searchParams.set("sortBy", "publishedAt");
-  url.searchParams.set("language", "en");
-  url.searchParams.set("pageSize", "10");                          
   url.searchParams.set("page", String(page));
 
-  const res = await fetch(url, {
-    headers: { "X-Api-Key": NEWS_API_KEY }                          
-  });
+  const res = await fetch(url);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch news");
-  }
+  if (!res.ok) throw new Error("Failed to fetch news");
+
   const data = await res.json();
   if (data.status !== "ok") {
     throw new Error(data.message || "News API error");
   }
-  return data;                                                      
-}
 
+  return data;
+}
 
 function renderArticles({ container, articles }) {
   if (!container) return;
@@ -52,7 +44,7 @@ function renderArticles({ container, articles }) {
 
     const imageUrl =
       article.urlToImage ||
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80"; // fallback[web:56]
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80"; 
 
     const published = article.publishedAt
       ? new Date(article.publishedAt).toLocaleDateString()
@@ -134,7 +126,7 @@ function initTopicPage({
       }
     } catch (err) {
       console.error("News API error:", err);
-      setStatus("Live news works on desktop localhost. On some devices or networks, the news provider may block requests, so this page cannot load articles right now.");
+      setStatus("Error loading news. Please try again later.");
     }
   }
 
